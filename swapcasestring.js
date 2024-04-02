@@ -16,4 +16,4 @@ function swapCaseOfString(inputString) {
 // Testing the function
 const input = "The Quick Brown Fox";
 const output = swapCaseOfString(input);
-console.log(output); // Output: 'tHE qUICK bROWN fOX'
+console.log(output);
