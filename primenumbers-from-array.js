@@ -1,23 +1,45 @@
-function checksPrimeNumbersInInput(num) {
-  if (num <= 1) return false;
-  if (num <= 3) return true;
-
-  if (num % 2 === 0 || num % 3 === 0) return false;
-
-  let i = 5;
-  while (i * i <= num) {
-    if (num % i === 0 || num % (i + 2) === 0) return false;
-    i += 6;
+function isAPrimeNumber(number) {
+  if (number < 2) {
+    return false;
   }
-
+  for (let m = 2; m <= Math.sqrt(number); m++) {
+    if (number % m === 0) {
+      return false;
+    }
+  }
   return true;
 }
 
-function filterPrimeNumbers(inputArray) {
-  return inputArray.filter((num) => checksPrimeNumbersInInput(num));
+function checkForPrimeNumbersinArrayOfNumbers() {
+  const input = prompt(
+    "Enter an array of numbers e.g. [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]:"
+  );
+  const numbers = input.split(",").map((num) => parseInt(num.trim(), 10));
+
+  if (!Array.isArray(numbers)) {
+    alert("Please input a valid array.");
+    return [];
+  }
+
+  const validNumbers = numbers.filter((num) => !isNaN(num)); // Filter out NaN values
+  const primeNumbers = validNumbers.filter((num) => {
+    if (typeof num !== "number") {
+      return false;
+    }
+    return isAPrimeNumber(num);
+  });
+
+  if (primeNumbers.length === 0) {
+    alert("No prime number identified in Your Array of Numbers.");
+  } else {
+    alert(
+      `The Prime numbers in Your Array of Numbers Are: [${primeNumbers.join(
+        ", "
+      )}]`
+    );
+  }
+
+  return primeNumbers;
 }
 
-// Testing the function
-const inputArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-const primeNumbers = filterPrimeNumbers(inputArray);
-console.log(primeNumbers);
+checkForPrimeNumbersinArrayOfNumbers();
